@@ -1,0 +1,41 @@
+{
+  "name": "inf04-snippets",
+  "displayName": "INF04 Snippets",
+  "description": "Snippety do egzaminu INF04 – Python, C# WPF, React, Android Kotlin, Express",
+  "version": "1.0.0",
+  "publisher": "inf04",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "python",
+        "path": "./snippets/python.json"
+      },
+      {
+        "language": "csharp",
+        "path": "./snippets/csharp.json"
+      },
+      {
+        "language": "javascriptreact",
+        "path": "./snippets/react.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/react.json"
+      },
+      {
+        "language": "kotlin",
+        "path": "./snippets/kotlin.json"
+      },
+      {
+        "language": "javascript",
+        "path": "./snippets/express.json"
+      }
+    ]
+  }
+}

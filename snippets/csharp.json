@@ -1,0 +1,226 @@
+{
+  "WPF C# – pełny CRUD + DataBinding (ListView)": {
+    "prefix": "4QWPFcrud!",
+    "description": "WPF CRUD + ListView + ObservableCollection – INF04",
+    "body": [
+      "// ================= XAML (Grid) =================",
+      "<StackPanel Margin=\"10\">",
+      "  <TextBox x:Name=\"txtNazwa\" Margin=\"5\" />",
+      "  <TextBox x:Name=\"txtCena\" Margin=\"5\" />",
+      "  <Button Content=\"Dodaj\" Click=\"BtnDodaj_Click\" Margin=\"5\"/>",
+      "  <Button Content=\"Usuń\" Click=\"BtnUsun_Click\" Margin=\"5\"/>",
+      "  <Button Content=\"Edytuj\" Click=\"BtnEdytuj_Click\" Margin=\"5\"/>",
+      "",
+      "  <ListView x:Name=\"lvLista\" Margin=\"5\" Height=\"200\">",
+      "    <ListView.View>",
+      "      <GridView>",
+      "        <GridViewColumn Header=\"Nazwa\" DisplayMemberBinding=\"{Binding Nazwa}\" Width=\"150\"/>",
+      "        <GridViewColumn Header=\"Cena\" DisplayMemberBinding=\"{Binding Cena}\" Width=\"100\"/>",
+      "      </GridView>",
+      "    </ListView.View>",
+      "  </ListView>",
+      "",
+      "  <TextBlock x:Name=\"txtBlad\" Foreground=\"Red\"/>",
+      "</StackPanel>",
+      "",
+      "using System.Collections.ObjectModel;",
+      "using System.Windows;",
+      "",
+      "public class Produkt",
+      "{",
+      "    public int Id { get; set; }",
+      "    public string Nazwa { get; set; } = \"\";",
+      "    public double Cena { get; set; }",
+      "}",
+      "",
+      "public partial class MainWindow : Window",
+      "{",
+      "    ObservableCollection<Produkt> lista = new();",
+      "    int id = 1;",
+      "",
+      "    public MainWindow()",
+      "    {",
+      "        InitializeComponent();",
+      "        lvLista.ItemsSource = lista;",
+      "    }",
+      "",
+      "    private void BtnDodaj_Click(object sender, RoutedEventArgs e)",
+      "    {",
+      "        lista.Add(new Produkt { Id = id++, Nazwa = txtNazwa.Text, Cena = double.Parse(txtCena.Text) });",
+      "    }",
+      "",
+      "    private void BtnUsun_Click(object sender, RoutedEventArgs e)",
+      "    {",
+      "        if (lvLista.SelectedItem is Produkt p) lista.Remove(p);",
+      "    }",
+      "",
+      "    private void BtnEdytuj_Click(object sender, RoutedEventArgs e)",
+      "    {",
+      "        if (lvLista.SelectedItem is Produkt p)",
+      "        {",
+      "            p.Nazwa = txtNazwa.Text;",
+      "            p.Cena = double.Parse(txtCena.Text);",
+      "            lvLista.Items.Refresh();",
+      "        }",
+      "    }",
+      "}"
+    ]
+  },
+
+  "WPF – DataBinding INotifyPropertyChanged": {
+    "prefix": "4QWPFbinding!",
+    "description": "INotifyPropertyChanged + ObservableCollection",
+    "body": [
+      "using System.ComponentModel;",
+      "using System.Runtime.CompilerServices;",
+      "using System.Collections.ObjectModel;",
+      "using System.Windows;",
+      "",
+      "public class Produkt : INotifyPropertyChanged",
+      "{",
+      "    private string nazwa;",
+      "    private double cena;",
+      "",
+      "    public string Nazwa",
+      "    {",
+      "        get => nazwa;",
+      "        set { nazwa = value; OnPropertyChanged(); }",
+      "    }",
+      "",
+      "    public double Cena",
+      "    {",
+      "        get => cena;",
+      "        set { cena = value; OnPropertyChanged(); }",
+      "    }",
+      "",
+      "    public event PropertyChangedEventHandler PropertyChanged;",
+      "    void OnPropertyChanged([CallerMemberName] string name = null)",
+      "        => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));",
+      "}",
+      "",
+      "public partial class MainWindow : Window",
+      "{",
+      "    public ObservableCollection<Produkt> Produkty { get; set; } = new();",
+      "",
+      "    public MainWindow()",
+      "    {",
+      "        InitializeComponent();",
+      "        DataContext = this;",
+      "    }",
+      "}"
+    ]
+  },
+
+  "WPF – MessageBox + konwersje typów": {
+    "prefix": "4QWPFutils!",
+    "description": "MessageBox + TryParse + DateTime",
+    "body": [
+      "using System;",
+      "using System.Windows;",
+      "",
+      "MessageBox.Show(\"OK\", \"Info\");",
+      "",
+      "if (double.TryParse(txtCena.Text, out double cena))",
+      "    MessageBox.Show(cena.ToString());",
+      "",
+      "DateTime teraz = DateTime.Now;",
+      "string data = teraz.ToString(\"dd.MM.yyyy\");"
+    ]
+  },
+
+  "WPF – Controls (ComboBox / RadioButton / CheckBox)": {
+    "prefix": "4QWPFcontrols!",
+    "description": "Controls WPF",
+    "body": [
+      "// ComboBox",
+      "cb.Items.Add(\"A\");",
+      "cb.Items.Add(\"B\");",
+      "",
+      "string sel = cb.SelectedItem?.ToString();",
+      "",
+      "// RadioButton",
+      "string rozmiar = rb1.IsChecked == true ? \"S\" : \"M\";",
+      "",
+      "// CheckBox",
+      "bool dostawa = chk.IsChecked == true;"
+    ]
+  },
+
+  "WPF – wyjątki try/catch": {
+    "prefix": "4QWPFexceptions!",
+    "description": "Obsługa błędów",
+    "body": [
+      "try",
+      "{",
+      "    int x = int.Parse(txt.Text);",
+      "}",
+      "catch (Exception ex)",
+      "{",
+      "    MessageBox.Show(ex.Message);",
+      "}"
+    ]
+  },
+
+  "WPF – pliki TXT + CSV": {
+    "prefix": "4QWPFfiles!",
+    "description": "File I/O WPF",
+    "body": [
+      "using System.IO;",
+      "",
+      "File.WriteAllText(\"plik.txt\", \"test\");",
+      "string data = File.ReadAllText(\"plik.txt\");",
+      "",
+      "File.WriteAllLines(\"dane.csv\", new[] { \"A;B\", \"1;2\" });",
+      "string[] lines = File.ReadAllLines(\"dane.csv\");"
+    ]
+  },
+
+  "WPF – OpenFileDialog + MediaElement (FILM)": {
+    "prefix": "4QWPFvideo!",
+    "description": "WPF video player",
+    "body": [
+      "using Microsoft.Win32;",
+      "",
+      "OpenFileDialog dlg = new OpenFileDialog();",
+      "dlg.Filter = \"Video|*.mp4;*.avi;*.wmv\";",
+      "",
+      "if (dlg.ShowDialog() == true)",
+      "{",
+      "    mediaElement.Source = new Uri(dlg.FileName);",
+      "    mediaElement.Play();",
+      "}"
+    ]
+  },
+
+  "WPF – Image (zamiast PictureBox)": {
+    "prefix": "4QWPFimage!",
+    "description": "WPF obrazki",
+    "body": [
+      "using Microsoft.Win32;",
+      "using System.Windows.Media.Imaging;",
+      "",
+      "OpenFileDialog dlg = new OpenFileDialog();",
+      "dlg.Filter = \"Images|*.jpg;*.png\";",
+      "",
+      "if (dlg.ShowDialog() == true)",
+      "{",
+      "    image.Source = new BitmapImage(new Uri(dlg.FileName));",
+      "}"
+    ]
+  },
+
+  "C# – Random (WPF version)": {
+    "prefix": "4QWPFrandom!",
+    "description": "Random w WPF",
+    "body": [
+      "Random los = new Random();",
+      "",
+      "int a = los.Next(1, 10);",
+      "double d = los.NextDouble();",
+      "",
+      "int[] tab = new int[5];",
+      "for (int i = 0; i < tab.Length; i++)",
+      "    tab[i] = los.Next(1, 100);"
+    ]
+  }
+}

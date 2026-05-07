@@ -1,0 +1,399 @@
+{
+  "4QExpressSetupGuide": {
+    "prefix": "4QExpressSetupGuide",
+    "description": "Instrukcja krok po kroku jak utworzyć projekt Express (Node.js)",
+    "body": [
+      "// ===============================",
+      "// 1. TWORZENIE PROJEKTU",
+      "// ===============================",
+      "mkdir my-express-app",
+      "cd my-express-app",
+      "",
+      "// ===============================",
+      "// 2. INICJALIZACJA NODE",
+      "// ===============================",
+      "npm init -y",
+      "",
+      "// ===============================",
+      "// 3. INSTALACJA BIBLIOTEK",
+      "// ===============================",
+      "npm install express cors mysql2",
+      "",
+      "// (opcjonalnie auto restart serwera)",
+      "npm install nodemon --save-dev",
+      "",
+      "// ===============================",
+      "// 4. TWORZENIE PLIKU GŁÓWNEGO",
+      "// ===============================",
+      "touch server.js",
+      "",
+      "// STRUKTURA PROJEKTU:",
+      "// my-express-app/",
+      "// ├── node_modules/",
+      "// ├── server.js",
+      "// ├── package.json",
+      "// └── package-lock.json",
+      "",
+      "// ===============================",
+      "// 5. URUCHAMIANIE SERWERA",
+      "// ===============================",
+      "node server.js",
+      "",
+      "// lub (jeśli nodemon):",
+      "// npx nodemon server.js",
+      "",
+      "// ===============================",
+      "// 6. PRZYDATNY SCRIPT (package.json)",
+      "// ===============================",
+      "// \"scripts\": {",
+      "//   \"start\": \"node server.js\",",
+      "//   \"dev\": \"nodemon server.js\"",
+      "// }"
+    ]
+  },
+  "4QExpressServer": {
+    "prefix": "4QExpressServer",
+    "description": "Podstawowy serwer Express",
+    "body": [
+      "const express = require('express');",
+      "const app = express();",
+      "",
+      "app.use(express.json());",
+      "",
+      "app.get('/', (req, res) => {",
+      "    res.send('Server działa');",
+      "});",
+      "",
+      "app.listen(3000, () => {",
+      "    console.log('Server działa na porcie 3000');",
+      "});"
+    ]
+  },
+
+  "4QGetParam": {
+    "prefix": "4QGetParam",
+    "description": "GET z parametrem URL",
+    "body": [
+      "app.get('/user/:id', (req, res) => {",
+      "    const id = req.params.id;",
+      "",
+      "    res.send(`ID użytkownika: ${id}`);",
+      "});"
+    ]
+  },
+
+  "4QPostJSON": {
+    "prefix": "4QPostJSON",
+    "description": "POST JSON Express",
+    "body": [
+      "app.post('/add', (req, res) => {",
+      "    const { name, age } = req.body;",
+      "",
+      "    res.json({",
+      "        message: 'Dane odebrane',",
+      "        name,",
+      "        age",
+      "    });",
+      "});"
+    ]
+  },
+
+  "4QPutRoute": {
+    "prefix": "4QPutRoute",
+    "description": "PUT update danych",
+    "body": [
+      "app.put('/users/:id', (req, res) => {",
+      "    const id = req.params.id;",
+      "    const { name } = req.body;",
+      "",
+      "    res.json({",
+      "        message: 'Użytkownik zaktualizowany',",
+      "        id,",
+      "        name",
+      "    });",
+      "});"
+    ]
+  },
+
+  "4QDeleteRoute": {
+    "prefix": "4QDeleteRoute",
+    "description": "DELETE usuwanie danych",
+    "body": [
+      "app.delete('/users/:id', (req, res) => {",
+      "    const id = req.params.id;",
+      "",
+      "    res.json({",
+      "        message: 'Użytkownik usunięty',",
+      "        id",
+      "    });",
+      "});"
+    ]
+  },
+
+  "4QReadFile": {
+    "prefix": "4QReadFile",
+    "description": "Czytanie pliku Node.js",
+    "body": [
+      "const fs = require('fs');",
+      "",
+      "fs.readFile('data.txt', 'utf8', (err, data) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log(data);",
+      "});"
+    ]
+  },
+
+  "4QWriteFile": {
+    "prefix": "4QWriteFile",
+    "description": "Zapis pliku Node.js",
+    "body": [
+      "const fs = require('fs');",
+      "",
+      "fs.writeFile('data.txt', 'Hello World', (err) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log('Plik zapisany');",
+      "});"
+    ]
+  },
+
+  "4QAppendFile": {
+    "prefix": "4QAppendFile",
+    "description": "Dopisanie do pliku",
+    "body": [
+      "const fs = require('fs');",
+      "",
+      "fs.appendFile('data.txt', '\\nNowa linia', (err) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log('Dodano do pliku');",
+      "});"
+    ]
+  },
+
+  "4QMySQLConnect": {
+    "prefix": "4QMySQLConnect",
+    "description": "Połączenie z MySQL",
+    "body": [
+      "const mysql = require('mysql2');",
+      "",
+      "const connection = mysql.createConnection({",
+      "    host: 'localhost',",
+      "    user: 'root',",
+      "    password: '',",
+      "    database: 'test'",
+      "});",
+      "",
+      "connection.connect((err) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log('Połączono z MySQL');",
+      "});"
+    ]
+  },
+
+  "4QMySQLSelect": {
+    "prefix": "4QMySQLSelect",
+    "description": "SELECT MySQL",
+    "body": [
+      "connection.query('SELECT * FROM users', (err, results) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log(results);",
+      "});"
+    ]
+  },
+
+  "4QMySQLInsert": {
+    "prefix": "4QMySQLInsert",
+    "description": "INSERT MySQL",
+    "body": [
+      "const sql = 'INSERT INTO users(name, age) VALUES (?, ?)';",
+      "",
+      "connection.query(sql, ['Jan', 20], (err, result) => {",
+      "    if (err) {",
+      "        console.log(err);",
+      "        return;",
+      "    }",
+      "",
+      "    console.log('Dodano rekord');",
+      "});"
+    ]
+  },
+
+  "4QFormPOST": {
+    "prefix": "4QFormPOST",
+    "description": "Obsługa formularza POST",
+    "body": [
+      "app.post('/form', (req, res) => {",
+      "    const { username, password } = req.body;",
+      "",
+      "    res.send(`Login: ${username}`);",
+      "});"
+    ]
+  },
+
+  "4QMiddleware": {
+    "prefix": "4QMiddleware",
+    "description": "Middleware Express",
+    "body": [
+      "app.use((req, res, next) => {",
+      "    console.log(`${req.method} ${req.url}`);",
+      "    next();",
+      "});"
+    ]
+  },
+
+  "4QCors": {
+    "prefix": "4QCors",
+    "description": "CORS Express",
+    "body": ["const cors = require('cors');", "", "app.use(cors());"]
+  },
+
+  "4QExpressCRUD": {
+    "prefix": "4QExpressCRUD",
+    "description": "CRUD Express",
+    "body": [
+      "const express = require('express');",
+      "const app = express();",
+      "",
+      "app.use(express.json());",
+      "",
+      "let users = [];",
+      "",
+      "// GET",
+      "app.get('/users', (req, res) => {",
+      "    res.json(users);",
+      "});",
+      "",
+      "// POST",
+      "app.post('/users', (req, res) => {",
+      "    const user = {",
+      "        id: Date.now(),",
+      "        name: req.body.name",
+      "    };",
+      "",
+      "    users.push(user);",
+      "    res.json(user);",
+      "});",
+      "",
+      "// PUT",
+      "app.put('/users/:id', (req, res) => {",
+      "    const id = Number(req.params.id);",
+      "",
+      "    users = users.map(user =>",
+      "        user.id === id",
+      "            ? { ...user, name: req.body.name }",
+      "            : user",
+      "    );",
+      "",
+      "    res.send('Zaktualizowano');",
+      "});",
+      "",
+      "// DELETE",
+      "app.delete('/users/:id', (req, res) => {",
+      "    const id = Number(req.params.id);",
+      "",
+      "    users = users.filter(user => user.id !== id);",
+      "",
+      "    res.send('Usunięto');",
+      "});",
+      "",
+      "app.listen(3000, () => {",
+      "    console.log('Server działa');",
+      "});"
+    ]
+  },
+
+  "4QExpressFullTemplate": {
+    "prefix": "4QExpressFullTemplate",
+    "description": "Pełny backend Express",
+    "body": [
+      "const express = require('express');",
+      "const cors = require('cors');",
+      "const fs = require('fs');",
+      "",
+      "const app = express();",
+      "",
+      "app.use(cors());",
+      "app.use(express.json());",
+      "",
+      "// Middleware",
+      "app.use((req, res, next) => {",
+      "    console.log(`${req.method} ${req.url}`);",
+      "    next();",
+      "});",
+      "",
+      "let users = [];",
+      "",
+      "// GET",
+      "app.get('/users', (req, res) => {",
+      "    res.json(users);",
+      "});",
+      "",
+      "// GET BY ID",
+      "app.get('/users/:id', (req, res) => {",
+      "    const id = Number(req.params.id);",
+      "    const user = users.find(u => u.id === id);",
+      "",
+      "    res.json(user);",
+      "});",
+      "",
+      "// POST",
+      "app.post('/users', (req, res) => {",
+      "    const user = {",
+      "        id: Date.now(),",
+      "        name: req.body.name",
+      "    };",
+      "",
+      "    users.push(user);",
+      "",
+      "    fs.writeFileSync('users.json', JSON.stringify(users, null, 2));",
+      "",
+      "    res.json(user);",
+      "});",
+      "",
+      "// PUT",
+      "app.put('/users/:id', (req, res) => {",
+      "    const id = Number(req.params.id);",
+      "",
+      "    users = users.map(user =>",
+      "        user.id === id",
+      "            ? { ...user, name: req.body.name }",
+      "            : user",
+      "    );",
+      "",
+      "    res.send('Użytkownik zaktualizowany');",
+      "});",
+      "",
+      "// DELETE",
+      "app.delete('/users/:id', (req, res) => {",
+      "    const id = Number(req.params.id);",
+      "",
+      "    users = users.filter(user => user.id !== id);",
+      "",
+      "    res.send('Użytkownik usunięty');",
+      "});",
+      "",
+      "app.listen(3000, () => {",
+      "    console.log('Server działa na porcie 3000');",
+      "});"
+    ]
+  }
+}

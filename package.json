@@ -8,7 +8,7 @@
   "icon": "icon.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/TY/inf04-snippets"
+    "url": "https://github.com/KrajziXXX/SectionKit"
   },
   "engines": {
     "vscode": "^1.80.0"

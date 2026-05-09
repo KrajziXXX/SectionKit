@@ -1,14 +1,29 @@
 {
-  "name": "inf04-snippets",
-  "displayName": "INF04 Snippets",
-  "description": "Snippety do egzaminu INF04 – Python, C# WPF, React, Android Kotlin, Express",
+  "name": "SectionKit",
+  "displayName": "SectionKit Snippets",
+  "description": "Snippety do lepszego kodowania.",
   "version": "1.0.0",
-  "publisher": "inf04",
+  "publisher": "TwojNazwaPublishera",
+  "license": "MIT",
+  "icon": "icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TY/inf04-snippets"
+  },
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
     "Snippets"
+  ],
+  "keywords": [
+    "inf04",
+    "snippets",
+    "python",
+    "csharp",
+    "kotlin",
+    "react",
+    "express"
   ],
   "contributes": {
     "snippets": [
